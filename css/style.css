@@ -1,0 +1,203 @@
+/* ====== Google Fonts ====== */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Protest+Strike&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+/* ====== Globals ====== */
+*{
+    font-family: "Ubuntu", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    /* Variables para colores reutilizables */
+    --blue: #2a2185;
+    --white: #fff;
+    --gray: #f5f5f5;
+    --black1: #222;
+    --black2: #999;
+}
+
+/* Estilos generales del cuerpo */
+body{
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.container{
+    /* Contenedor principal que abarca navegación y contenido */
+    position: relative;
+    width: 100%;
+}
+
+/* ====== Navigation ====== */
+.navigation{
+    /* Menú lateral de navegación */
+    position: fixed;
+    width: 300px;
+    height: 100%;
+    background: var(--blue);
+    transition: 0.5s;
+    overflow: hidden;
+}
+
+/* Estado 'active' para reducir el tamaño del menú */
+.navigation.active{
+    width: 80px;
+}
+
+.navigation ul li{
+    /* Elementos individuales en el menú */
+    list-style: none;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+/* Estilo de cada elemento de la lista al pasar el cursor */
+.navigation ul li:hover,
+.navigation ul li.hovered {
+    background-color: var(--white);
+}
+
+.navigation ul li a {
+    /* Enlaces dentro de cada elemento de menú */
+    display: flex;
+    text-decoration: none;
+    color: var(--white);
+}
+
+/* Iconos en el menú */
+.navigation ul li a .icon ion-icon{
+    font-size: 1.75rem;
+}
+
+/* Animación de curva para el efecto al pasar el cursor */
+.navigation ul li:hover a::before,
+.navigation ul li.hovered a::before{
+    content: "";
+    position: absolute;
+    right: 0;
+    top: -50px;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: 35px 35px 0 10px var(--white);
+}
+
+/* ========= Main ========== */
+.main{
+    /* Contenedor principal de contenido */
+    position: absolute;
+    width: calc(100% - 300px);
+    left: 300px;
+    background-color: var(--white);
+    transition: 0.5s;
+}
+
+.main.active{
+    /* Ajustes cuando el menú de navegación está colapsado */
+    width: calc(100% - 80px);
+    left: 80px;
+}
+
+.topbar{
+    /* Barra superior que incluye el menú toggle y barra de búsqueda */
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Toggle del menú */
+.toggle{
+    font-size: 2.5rem;
+    cursor: pointer;
+    color: var(--white);
+}
+
+/* ========== Cards ===============*/
+.cardBox{
+    /* Contenedor de tarjetas para métricas */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+}
+
+/* Estilos para cada tarjeta individual */
+.cardBox .card{
+    background: var(--white);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+}
+
+/* ========== Order Details List ============= */
+.details{
+    /* Contenedor para listas de órdenes y clientes recientes */
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 30px;
+}
+
+.details .recentOrders{
+    /* Tabla de órdenes recientes */
+    background: var(--white);
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+    border-radius: 20px;
+}
+
+/* ========== Status Labels ============= */
+.status.delivered {
+    /* Estilo para etiquetas de estado (e.g., delivered, pending) */
+    background: #8de02c;
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* ========== Responsive Design ============= */
+@media (max-width: 991px){
+    /* Ajustes para pantallas medianas */
+    .navigation{
+        left: -300px;
+    }
+    .main{
+        width: 100%;
+        left: 0;
+    }
+    .cardBox{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media (max-width: 768px){
+    /* Ajustes para pantallas pequeñas */
+    .details{
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px){
+    /* Ajustes para pantallas extra pequeñas */
+    .cardBox{
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .navigation{
+        width: 100%;
+        left: -100%;
+        z-index: 1000;
+    }
+    .navigation.active{
+        width: 100%;
+        left: 0;
+    }
+    .main.active .toggle{
+        color: #fff;
+        position: fixed;
+        right: 0;
+    }
+}
